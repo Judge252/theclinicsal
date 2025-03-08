@@ -131,7 +131,27 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 15px 20px; /* Add horizontal padding */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--text-light);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px; /* Add horizontal padding */
+    flex-direction: column;
+    gap: 15px;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 99;
 }
 
 .logo {
@@ -142,11 +162,6 @@ ul {
 .logo-image {
     height: 50px;
     width: auto;
-    transition: transform 0.3s ease;
-}
-
-.logo-image:hover {
-    transform: scale(1.05);
 }
 
 nav ul {
@@ -210,9 +225,8 @@ nav ul li a:hover::after {
 
 .mobile-menu li a {
     display: block;
-    padding: 10px;
+    padding: 10px 15px; /* Add more padding on the sides */
     font-weight: 600;
-    color: var(--primary-color);
 }
 
 .mobile-menu li a:hover, .mobile-menu li a.active {
