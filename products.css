@@ -47,6 +47,35 @@ ul {
     padding: 0 20px;
 }
 
+/* NEW: Button Styles */
+.btn {
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: var(--primary-color);
+}
+
+.primary-btn {
+    background-color: var(--secondary-color);
+    padding: 12px 25px;
+    font-size: 1.1rem;
+}
+
+.primary-btn:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
 /* Header Styles */
 #main-header {
     background-color: var(--text-light);
@@ -79,10 +108,10 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px; /* Add horizontal padding */
+    padding: 15px 20px;
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto; /* Center the container */
+    margin: 0 auto;
 }
 
 .mobile-menu {
@@ -93,7 +122,7 @@ ul {
     right: 0;
     background-color: var(--text-light);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px 20px; /* Add horizontal padding */
+    padding: 15px 20px;
     flex-direction: column;
     gap: 15px;
     transform: translateY(-10px);
@@ -148,23 +177,6 @@ nav ul li a:hover::after {
     color: var(--primary-color);
 }
 
-.mobile-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: var(--text-light);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    flex-direction: column;
-    gap: 15px;
-    transform: translateY(-10px);
-    opacity: 0;
-    transition: var(--transition);
-    z-index: 99;
-}
-
 .mobile-menu.show {
     display: flex;
     transform: translateY(0);
@@ -173,7 +185,7 @@ nav ul li a:hover::after {
 
 .mobile-menu li a {
     display: block;
-    padding: 10px 15px; /* Add more padding on the sides */
+    padding: 10px 15px;
     font-weight: 600;
 }
 
@@ -258,7 +270,7 @@ nav ul li a:hover::after {
     font-size: 1.1rem;
 }
 
-/* Footer Styles - UPDATED to match contact page styles */
+/* Footer Styles */
 footer {
     background-color: var(--dark-bg);
     color: var(--text-light);
@@ -283,7 +295,7 @@ footer {
     content: '';
     position: absolute;
     bottom: 0;
-    right: 0; /* RTL adjustment */
+    right: 0;
     width: 50px;
     height: 2px;
     background-color: var(--secondary-color);
@@ -300,14 +312,14 @@ footer {
 
 .footer-section ul li a:hover {
     color: var(--secondary-color);
-    padding-right: 5px; /* RTL adjustment */
+    padding-right: 5px;
 }
 
 .contact-info li {
     display: flex;
     align-items: center;
     gap: 10px;
-    flex-direction: row-reverse; /* RTL adjustment */
+    flex-direction: row-reverse;
 }
 
 .contact-info i {
@@ -354,7 +366,7 @@ footer {
     opacity: 0.7;
 }
 
-/* Newsletter section */
+/* Newsletter Section */
 .newsletter {
     background-color: var(--light-bg);
     padding: 60px 0;
@@ -398,60 +410,6 @@ footer {
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
-/* Media Queries */
-@media (max-width: 992px) {
-    .nav-container {
-        padding: 15px;
-    }
-    
-    .products-hero {
-        padding: 80px 0 50px;
-    }
-    
-    .categories-container {
-        gap: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    nav ul {
-        display: none;
-    }
-    
-    .menu-toggle {
-        display: block;
-    }
-    
-    .products-hero h1 {
-        font-size: 2rem;
-    }
-    
-    .newsletter-form {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .newsletter-form input,
-    .newsletter-form button {
-        width: 100%;
-        border-radius: var(--border-radius);
-    }
-}
-
-@media (max-width: 576px) {
-    .products-hero {
-        padding: 70px 0 40px;
-    }
-    
-    .categories-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .footer-container {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* Products Section Styles */
 .products-section {
     padding: 60px 0;
@@ -476,7 +434,7 @@ footer {
     content: '';
     position: absolute;
     bottom: -10px;
-    right: 0; /* Updated to RTL style */
+    right: 0;
     width: 60px;
     height: 3px;
     background-color: var(--secondary-color);
@@ -693,6 +651,8 @@ footer {
     display: flex;
     align-items: center;
     gap: 5px;
+    font-size: 1rem;
+    color: var(--primary-color);
 }
 
 .pagination button:hover:not(:disabled) {
@@ -870,8 +830,20 @@ footer {
     border-color: var(--secondary-color);
 }
 
-/* Media Queries for Products Page */
+/* Media Queries */
 @media (max-width: 992px) {
+    .nav-container {
+        padding: 15px;
+    }
+    
+    .products-hero {
+        padding: 80px 0 50px;
+    }
+    
+    .categories-container {
+        gap: 20px;
+    }
+
     .featured-product .container {
         grid-template-columns: 1fr;
         text-align: center;
@@ -891,6 +863,29 @@ footer {
 }
 
 @media (max-width: 768px) {
+    nav ul {
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .products-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form button {
+        width: 100%;
+        border-radius: var(--border-radius);
+    }
+
     .products-header {
         flex-direction: column;
         align-items: flex-start;
@@ -911,9 +906,31 @@ footer {
     .testimonial-card {
         padding: 20px;
     }
+
+    /* NEW: Make product action buttons visible on mobile */
+    .product-actions {
+        position: static;
+        background-color: transparent;
+        padding: 0;
+    }
+    .product-card:hover .product-actions {
+        bottom: unset;
+    }
 }
 
 @media (max-width: 576px) {
+    .products-hero {
+        padding: 70px 0 40px;
+    }
+    
+    .categories-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+
     .products-grid {
         grid-template-columns: 1fr;
     }

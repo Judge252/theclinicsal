@@ -162,6 +162,7 @@ let productsPerPage = 6;
 let filteredProducts = [...productsData];
 let currentCategory = 'all';
 let currentSort = 'popular';
+let cart = JSON.parse(localStorage.getItem('cart')) || []; // Initialize cart from localStorage
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', () => {
@@ -187,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     displayProducts();
     updatePagination();
 
-    // Event listeners
+    // Event listeners for filters and pagination
     categoryFilter.addEventListener('change', handleCategoryChange);
     sortFilter.addEventListener('change', handleSortChange);
     prevPageBtn.addEventListener('click', goToPrevPage);
@@ -246,6 +247,21 @@ document.addEventListener('DOMContentLoaded', () => {
             emailInput.value = '';
         }
     });
+
+    // NEW: Add event listener for the "اطلب الآن وخصم 25%" button in the Featured Product section
+    const orderButton = document.querySelector('.featured-product .primary-btn');
+    if (orderButton) {
+        orderButton.addEventListener('click', () => {
+            const featuredProduct = {
+                name: "جهاز المساج المحمول برو",
+                price: 899,
+                image: "im/5.jpg"
+            };
+            addToCart(featuredProduct);
+            alert('تمت إضافة جهاز المساج المحمول برو إلى السلة! يرجى اتباع التعليمات لإكمال الشراء.');
+            // Optionally redirect: window.location.href = 'checkout.html';
+        });
+    }
 });
 
 // Filter and sort products
@@ -362,25 +378,43 @@ function displayProducts() {
     actionBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            // Here you would add the actual functionality for wishlist, cart, etc.
             const icon = btn.querySelector('i');
+            const productCard = btn.closest('.product-card');
+            const productName = productCard.querySelector('.product-name').textContent;
+            const product = productsData.find(p => p.name === productName);
+
             if (icon.classList.contains('fa-heart')) {
-                alert('تمت الإضافة للمفضلة');
+                // Toggle heart icon for wishlist
+                icon.classList.toggle('far');
+                icon.classList.toggle('fas');
+                alert(icon.classList.contains('fas') ? 'تمت الإضافة للمفضلة' : 'تمت الإزالة من المفضلة');
             } else if (icon.classList.contains('fa-shopping-cart')) {
-                alert('تمت الإضافة للسلة');
+                addToCart(product);
+                alert(`${productName} تمت إضافته للسلة`);
             } else if (icon.classList.contains('fa-eye')) {
-                alert('عرض تفاصيل المنتج');
+                alert(`عرض تفاصيل المنتج: ${productName}`);
             }
         });
     });
 
-    // Add event listeners to add to cart buttons
+    // Add event listeners to add-to-cart buttons
     const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
     addToCartBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            alert('تمت إضافة المنتج للسلة بنجاح');
+            const productCard = btn.closest('.product-card');
+            const productName = productCard.querySelector('.product-name').textContent;
+            const product = productsData.find(p => p.name === productName);
+            addToCart(product);
+            alert(`تمت إضافة ${productName} للسلة بنجاح`);
         });
     });
+}
+
+// NEW: Function to add products to cart using localStorage
+function addToCart(product) {
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    console.log('Cart updated:', cart);
 }
 
 // Generate star rating
@@ -417,6 +451,9 @@ function updatePagination() {
     
     prevPageBtn.disabled = currentPage === 1;
     nextPageBtn.disabled = currentPage === totalPages;
+
+    // Debug: Log pagination state
+    console.log(`Pagination updated: Page ${currentPage} of ${totalPages}, Products: ${filteredProducts.length}`);
 }
 
 // Event handlers
@@ -432,10 +469,10 @@ function handleSortChange() {
 
 function goToPrevPage() {
     if (currentPage > 1) {
+        console.log('Previous page clicked');
         currentPage--;
         displayProducts();
         updatePagination();
-        // Scroll to top of products section
         document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' });
     }
 }
@@ -443,10 +480,10 @@ function goToPrevPage() {
 function goToNextPage() {
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
     if (currentPage < totalPages) {
+        console.log('Next page clicked');
         currentPage++;
         displayProducts();
         updatePagination();
-        // Scroll to top of products section
         document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' });
     }
 }
