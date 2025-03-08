@@ -1,4 +1,4 @@
-/* Root variables */
+/* Root Variables */
 :root {
     --primary-color: #1D3557;
     --secondary-color: #70AD47;
@@ -24,7 +24,7 @@ html {
 }
 
 body {
-    font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Tajawal', 'Arial', sans-serif;
     color: var(--text-color);
     line-height: 1.6;
     background-color: var(--light-bg);
@@ -45,39 +45,6 @@ ul {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-}
-
-/* Button Styles */
-.btn {
-    display: inline-block;
-    padding: 10px 25px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    text-align: center;
-}
-
-.primary-btn {
-    background-color: var(--secondary-color);
-    color: var(--text-light);
-}
-
-.primary-btn:hover {
-    background-color: var(--primary-color);
-    transform: translateY(-3px);
-}
-
-.secondary-btn {
-    background-color: transparent;
-    border: 2px solid var(--secondary-color);
-    color: var(--secondary-color);
-}
-
-.secondary-btn:hover {
-    background-color: var(--secondary-color);
-    color: var(--text-light);
 }
 
 /* Header Styles */
@@ -112,7 +79,27 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 15px 20px; /* Add horizontal padding */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--text-light);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px; /* Add horizontal padding */
+    flex-direction: column;
+    gap: 15px;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 99;
 }
 
 .logo {
@@ -186,7 +173,7 @@ nav ul li a:hover::after {
 
 .mobile-menu li a {
     display: block;
-    padding: 10px;
+    padding: 10px 15px; /* Add more padding on the sides */
     font-weight: 600;
 }
 
@@ -271,7 +258,7 @@ nav ul li a:hover::after {
     font-size: 1.1rem;
 }
 
-/* Footer Styles */
+/* Footer Styles - UPDATED to match contact page styles */
 footer {
     background-color: var(--dark-bg);
     color: var(--text-light);
@@ -296,7 +283,7 @@ footer {
     content: '';
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 0; /* RTL adjustment */
     width: 50px;
     height: 2px;
     background-color: var(--secondary-color);
@@ -313,13 +300,18 @@ footer {
 
 .footer-section ul li a:hover {
     color: var(--secondary-color);
-    padding-right: 5px;
+    padding-right: 5px; /* RTL adjustment */
 }
 
 .contact-info li {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-direction: row-reverse; /* RTL adjustment */
+}
+
+.contact-info i {
+    color: var(--secondary-color);
 }
 
 .social-icons {
@@ -484,7 +476,7 @@ footer {
     content: '';
     position: absolute;
     bottom: -10px;
-    right: 0;
+    right: 0; /* Updated to RTL style */
     width: 60px;
     height: 3px;
     background-color: var(--secondary-color);
