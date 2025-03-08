@@ -79,7 +79,27 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 15px 20px; /* Add horizontal padding */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--text-light);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px; /* Add horizontal padding */
+    flex-direction: column;
+    gap: 15px;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 99;
 }
 
 .logo {
@@ -90,11 +110,6 @@ ul {
 .logo-image {
     height: 50px;
     width: auto;
-    transition: transform 0.3s ease;
-}
-
-.logo-image:hover {
-    transform: scale(1.05);
 }
 
 nav ul {
@@ -109,8 +124,7 @@ nav ul li a {
     color: var(--primary-color);
 }
 
-nav ul li a:hover,
-nav ul li a.active {
+nav ul li a:hover, nav ul li a.active {
     color: var(--secondary-color);
 }
 
@@ -159,13 +173,11 @@ nav ul li a:hover::after {
 
 .mobile-menu li a {
     display: block;
-    padding: 10px;
+    padding: 10px 15px; /* Add more padding on the sides */
     font-weight: 600;
-    color: var(--primary-color);
 }
 
-.mobile-menu li a:hover,
-.mobile-menu li a.active {
+.mobile-menu li a:hover, .mobile-menu li a.active {
     background-color: var(--light-bg);
     color: var(--secondary-color);
     border-radius: var(--border-radius);
@@ -469,11 +481,23 @@ footer {
     padding-right: 5px; /* RTL */
 }
 
-.contact-info li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-direction: row-reverse; /* RTL adjustment */
+/* Check this block in your CSS */
+.contact-info {
+    background: var(--text-light);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+.contact-info, .contact-form {
+    position: relative;
+    z-index: 1;
+}
+
+/* If there's a container causing the issue, restrict its size */
+footer .contact-info {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
 }
 
 .contact-info i {
