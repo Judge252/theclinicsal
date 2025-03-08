@@ -2,14 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Toggle (Same as Homepage)
     const menuToggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
-
+    
     menuToggle.addEventListener('click', () => {
         mobileMenu.classList.toggle('show');
         const isOpen = mobileMenu.classList.contains('show');
         menuToggle.querySelector('i').classList.toggle('fa-bars', !isOpen);
         menuToggle.querySelector('i').classList.toggle('fa-times', isOpen);
     });
-
+    
     // Close mobile menu when a link is clicked
     document.querySelectorAll('.mobile-menu a').forEach(link => {
         link.addEventListener('click', () => {
@@ -18,13 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
             menuToggle.querySelector('i').classList.add('fa-bars');
         });
     });
-
+    
     // Sticky Header (Same as Homepage)
     window.addEventListener('scroll', () => {
         const header = document.getElementById('main-header');
         header.classList.toggle('sticky', window.scrollY > 50);
     });
-
+    
     // Smooth Scrolling for Anchor Links (Same as Homepage)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
@@ -35,35 +35,50 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // Timeline Animation on Scroll
+    
+    // Timeline Animation on Scroll - IMPROVED
     const timelineItems = document.querySelectorAll('.timeline-item');
-
+    
+    // Improved isInViewport function with better mobile support
     const isInViewport = (element) => {
         const rect = element.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        
+        // Consider element in view when it's at least partially visible
         return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            (rect.top <= windowHeight && rect.top + 100 >= 0) ||
+            (rect.bottom <= windowHeight && rect.bottom >= 0) ||
+            (rect.top <= 0 && rect.bottom >= windowHeight)
         );
     };
-
+    
     const animateTimeline = () => {
         timelineItems.forEach((item, index) => {
             if (isInViewport(item)) {
-                item.classList.add('visible');
-                item.style.transitionDelay = `${index * 0.2}s`; // Staggered animation
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, index * 150); // Shorter staggered delay for mobile
             }
         });
     };
-
-    // Initial check on load
-    animateTimeline();
-
-    // Check on scroll
-    window.addEventListener('scroll', animateTimeline);
-
+    
+    // Initial check with a slight delay to ensure elements are properly rendered
+    setTimeout(animateTimeline, 300);
+    
+    // Throttled scroll event for better performance
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(() => {
+                animateTimeline();
+                scrollTimeout = null;
+            }, 100);
+        }
+    });
+    
+    // Also trigger on resize to handle orientation changes
+    window.addEventListener('resize', animateTimeline);
+    
     // Team Card Hover Effect (Optional Enhancement)
     const teamCards = document.querySelectorAll('.team-card');
     teamCards.forEach(card => {
