@@ -90,7 +90,7 @@ ul {
     100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(112, 173, 71, 0); }
 }
 
-/* Header Styles (Same as Homepage) */
+/* Header Styles */
 #main-header {
     background-color: var(--text-light);
     box-shadow: var(--box-shadow);
@@ -110,15 +110,22 @@ ul {
 }
 
 @keyframes slideDown {
-    from { transform: translateY(-100%); }
-    to { transform: translateY(0); }
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
 
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 15px 20px; /* Add horizontal padding */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
 }
 
 .logo {
@@ -129,11 +136,6 @@ ul {
 .logo-image {
     height: 50px;
     width: auto;
-    transition: transform 0.3s ease;
-}
-
-.logo-image:hover {
-    transform: scale(1.05);
 }
 
 nav ul {
@@ -172,6 +174,16 @@ nav ul li a:hover::after {
     color: var(--primary-color);
 }
 
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px; /* Add horizontal padding */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
 .mobile-menu {
     display: none;
     position: absolute;
@@ -180,7 +192,7 @@ nav ul li a:hover::after {
     right: 0;
     background-color: var(--text-light);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+    padding: 15px 20px; /* Add horizontal padding */
     flex-direction: column;
     gap: 15px;
     transform: translateY(-10px);
@@ -197,9 +209,8 @@ nav ul li a:hover::after {
 
 .mobile-menu li a {
     display: block;
-    padding: 10px;
+    padding: 10px 15px; /* Add more padding on the sides */
     font-weight: 600;
-    color: var(--primary-color);
 }
 
 .mobile-menu li a:hover, .mobile-menu li a.active {
@@ -364,7 +375,46 @@ nav ul li a:hover::after {
     }
 }  
 
-/* History Timeline (Continued from First Half) */
+/* Fixed Timeline CSS */
+.history-timeline {
+    padding: 60px 0;
+    background-color: var(--text-light);
+}
+
+.history-timeline h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.history-timeline h2::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+.timeline-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.timeline-line {
+    position: absolute;
+    height: 100%;
+    width: 4px;
+    background: var(--secondary-color);
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+}
+
 .timeline-item {
     margin-bottom: 40px;
     position: relative;
@@ -419,6 +469,56 @@ nav ul li a:hover::after {
     top: 25px;
     transform: translateX(-50%);
     z-index: 1;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+    .timeline-line {
+        left: 30px; /* Adjusted position */
+        transform: none;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+        margin-left: 20px;
+        transform: translateY(50px);
+    }
+    
+    .timeline-item.visible {
+        transform: translateY(0);
+    }
+    
+    .timeline-item:nth-child(odd) {
+        justify-content: flex-start;
+    }
+    
+    .timeline-content {
+        width: calc(100% - 60px);
+        margin-left: 40px;
+    }
+    
+    .timeline-dot {
+        left: 30px;
+        transform: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .timeline-content {
+        padding: 15px;
+        width: calc(100% - 40px);
+        margin-left: 20px;
+    }
+    
+    .timeline-line {
+        left: 20px;
+    }
+    
+    .timeline-dot {
+        left: 20px;
+        width: 16px;
+        height: 16px;
+    }
 }
 
 /* About Values Section */
