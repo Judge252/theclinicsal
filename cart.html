@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيادة العلاج الطبيعي - سلة التسوق</title>
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="عيادة العلاج الطبيعي" class="logo-image">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="products.html">منتجاتنا</a></li>
+                    <li><a href="contact.html">تواصل معنا</a></li>
+                    <li class="cart-icon">
+                        <a href="cart.html" class="active">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+                <button class="menu-toggle" aria-label="Toggle Mobile Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+        <ul class="mobile-menu">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="about.html">من نحن</a></li>
+            <li><a href="products.html">منتجاتنا</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+            <li><a href="cart.html" class="active">سلة التسوق</a></li>
+        </ul>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="cart-section">
+            <div class="container">
+                <h1>سلة التسوق الخاصة بك</h1>
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart fa-3x"></i>
+                        <p>سلتك فارغة حاليًا. ابدأ التسوق الآن!</p>
+                        <a href="products.html" class="btn primary-btn pulse-animation">تسوق الآن</a>
+                    </div>
+                </div>
+                <div class="cart-summary" id="cart-summary" style="display: none;">
+                    <h2>ملخص الطلب</h2>
+                    <div class="summary-details">
+                        <p>المجموع الفرعي: <span id="subtotal">0 دولار</span></p>
+                        <p>رسوم الشحن: <span>مجاني</span></p>
+                        <p class="total">الإجمالي: <span id="total">0 دولار</span></p>
+                    </div>
+                    <button class="btn primary-btn checkout-btn pulse-animation">إتمام الشراء</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="logo">
+                    <img src="logo.png" alt="عيادة العلاج الطبيعي" class="logo-image">
+                </div>
+                <p>نقدم أفضل المنتجات الطبية والعلاجية لراحتك وصحتك. نحن هنا لمساعدتك في كل خطوة نحو حياة صحية أفضل.</p>
+                <div class="payment-methods">
+                    <span><i class="fab fa-cc-visa"></i></span>
+                    <span><i class="fab fa-cc-mastercard"></i></span>
+                    <span><i class="fab fa-cc-apple-pay"></i></span>
+                    <span><i class="fab fa-cc-paypal"></i></span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="products.html">منتجاتنا</a></li>
+                    <li><a href="contact.html">تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>فئات المنتجات</h3>
+                <ul>
+                    <li><a href="#">أجهزة المساج</a></li>
+                    <li><a href="#">أجهزة الركض</a></li>
+                    <li><a href="#">وسائد طبية</a></li>
+                    <li><a href="#">دعامات طبية</a></li>
+                    <li><a href="#">أجهزة قياس</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-phone"></i> الهاتف: 011 123 4567</li>
+                    <li><i class="fas fa-envelope"></i> البريد: <a href="mailto:info@ptclinic.com">info@ptclinic.com</a></li>
+                    <li><i class="fas fa-map-marker-alt"></i> العنوان: 14 شارع ابوبكر، طرعان</li>
+                    <li><i class="fas fa-clock"></i> ساعات العمل: 9 ص - 9 م</li>
+                </ul>
+                <div class="social-icons">
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2024 عيادة العلاج الطبيعي. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html>
