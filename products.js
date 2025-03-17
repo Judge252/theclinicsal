@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactIcon && contactOptions) {
         contactIcon.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation(); // Prevent any parent event handlers from interfering
             contactOptions.classList.toggle('show');
             // Close dropdown when clicking outside
             document.addEventListener('click', function closeDropdown(event) {
@@ -67,7 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     contactOptions.classList.remove('show');
                     document.removeEventListener('click', closeDropdown);
                 }
-            });
+            }, { once: true }); // Ensure the listener is removed after one execution
+        });
+
+        // Prevent hover interference (optional, since CSS will handle this)
+        contactIcon.addEventListener('mouseover', (e) => {
+            e.stopPropagation(); // Prevent hover from triggering unwanted behavior
         });
     }
 
