@@ -141,6 +141,7 @@ ul {
 .logo-image {
     height: 50px;
     width: auto;
+    filter: brightness(0) invert(1); /* Adjust logo visibility if needed */
 }
 
 nav ul {
@@ -235,6 +236,7 @@ nav ul li a:hover::after {
     height: 40px;
     border-radius: 50%;
     transition: var(--transition);
+    position: relative; /* Ensure proper positioning for dropdown */
 }
 
 /* Contact Icon Styles (General) */
@@ -243,6 +245,7 @@ nav ul li a:hover::after {
     font-size: 1.4rem;
     color: var(--primary-color);
     cursor: pointer;
+    z-index: 101; /* Ensure it stays above other elements */
 }
 
 /* Improve Contact Icon Appearance on Mobile */
@@ -257,6 +260,7 @@ nav ul li a:hover::after {
 
 .contact-icon i {
     line-height: 40px;
+    z-index: 101; /* Ensure icon is clickable */
 }
 
 /* Contact Options Dropdown */
@@ -271,10 +275,15 @@ nav ul li a:hover::after {
     padding: 10px;
     min-width: 120px;
     z-index: 100;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .contact-icon:hover .contact-options {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .contact-options a {
@@ -913,9 +922,10 @@ nav ul li a:hover::after {
 
 /* Footer Styles */
 footer {
-    background-color: var(--dark-bg);
+    background-color: rgba(29, 53, 87, 0.9); /* Semi-transparent dark background for better logo visibility */
     color: var(--text-light);
     padding: 60px 0 0;
+    position: relative; /* Ensure proper layering */
 }
 
 .footer-container {
@@ -929,6 +939,8 @@ footer {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    position: relative; /* Ensure content is above background */
+    z-index: 1; /* Ensure content is above the background */
 }
 
 .footer-section h3 {
