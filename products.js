@@ -2,34 +2,45 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
-    menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('show');
-        const isOpen = mobileMenu.classList.contains('show');
-        const toggleIcon = menuToggle.querySelector('i');
-        toggleIcon.classList.toggle('fa-bars', !isOpen);
-        toggleIcon.classList.toggle('fa-times', isOpen);
-    });
-
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('show');
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('show');
+            const isOpen = mobileMenu.classList.contains('show');
             const toggleIcon = menuToggle.querySelector('i');
-            toggleIcon.classList.remove('fa-times');
-            toggleIcon.classList.add('fa-bars');
+            if (toggleIcon) {
+                toggleIcon.classList.toggle('fa-bars', !isOpen);
+                toggleIcon.classList.toggle('fa-times', isOpen);
+            }
         });
-    });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('show');
+                const toggleIcon = menuToggle.querySelector('i');
+                if (toggleIcon) {
+                    toggleIcon.classList.remove('fa-times');
+                    toggleIcon.classList.add('fa-bars');
+                }
+            });
+        });
+    }
 
     // Sticky Header
     window.addEventListener('scroll', () => {
         const header = document.getElementById('main-header');
-        header.classList.toggle('sticky', window.scrollY > 50);
+        if (header) {
+            header.classList.toggle('sticky', window.scrollY > 50);
+        }
     });
 
     // Smooth Scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             e.preventDefault();
-            document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            const target = document.querySelector(anchor.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 
@@ -37,9 +48,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartCountElem = document.querySelectorAll('.cart-count');
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     function updateCartCount() {
-        cartCountElem.forEach(elem => elem.textContent = cart.length);
+        cartCountElem.forEach(elem => {
+            if (elem) elem.textContent = cart.length;
+        });
     }
     updateCartCount();
+
+    // Contact Icon Dropdown
+    const contactIcon = document.querySelector('.contact-icon');
+    const contactOptions = document.querySelector('.contact-options');
+    if (contactIcon && contactOptions) {
+        contactIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            contactOptions.classList.toggle('show');
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function closeDropdown(event) {
+                if (!contactIcon.contains(event.target) && !contactOptions.contains(event.target)) {
+                    contactOptions.classList.remove('show');
+                    document.removeEventListener('click', closeDropdown);
+                }
+            });
+        });
+    }
 
     // Products Data
     const productsData = [
@@ -53,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 8, name: "جهاز ركض قابل للطي", category: "treadmill", price: 2499, oldPrice: 2799, rating: 4.5, reviewCount: 56, image: "product10.jpg", isNew: true, isBestseller: false },
         { id: 9, name: "وسادة طبية للنوم على الجانب", category: "pillows", price: 179, oldPrice: 229, rating: 4.6, reviewCount: 62, image: "product11.jpg", isNew: true, isBestseller: false },
         { id: 10, name: "جهاز مساج اليد الذكي", category: "massage", price: 349, oldPrice: 399, rating: 4.8, reviewCount: 78, image: "product12.jpg", isNew: false, isBestseller: true },
-        // Updated "supports" category with 5 specific products and corrected relative image paths
         { id: 11, name: "عكاز تقليدي", category: "supports", price: 99, oldPrice: null, rating: 4.5, reviewCount: 50, image: "im/eldry/O404504_3152017131858-9-9.png", isNew: false, isBestseller: false },
         { id: 12, name: "مشايه لكبار السن Rollator Walker", category: "supports", price: 499, oldPrice: 599, rating: 4.7, reviewCount: 85, image: "im/eldry/H357049_315201710530-9-29.png", isNew: true, isBestseller: true },
         { id: 13, name: "عكاز ٤ نقاط", category: "supports", price: 149, oldPrice: 179, rating: 4.6, reviewCount: 60, image: "im/eldry/Cat_240429_866.jpg", isNew: false, isBestseller: false },
@@ -84,36 +113,46 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePagination();
 
     // Event Listeners
-    categoryFilter.addEventListener('change', () => {
-        currentCategory = categoryFilter.value;
-        filterAndSortProducts();
-    });
-    sortFilter.addEventListener('change', () => {
-        currentSort = sortFilter.value;
-        filterAndSortProducts();
-    });
-    prevPageBtn.addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            displayProducts();
-            updatePagination();
-        }
-    });
-    nextPageBtn.addEventListener('click', () => {
-        const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-        if (currentPage < totalPages) {
-            currentPage++;
-            displayProducts();
-            updatePagination();
-        }
-    });
-    categoryCards.forEach(card => {
-        card.addEventListener('click', () => {
-            currentCategory = card.dataset.category;
-            categoryFilter.value = currentCategory;
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', () => {
+            currentCategory = categoryFilter.value;
             filterAndSortProducts();
         });
-    });
+    }
+    if (sortFilter) {
+        sortFilter.addEventListener('change', () => {
+            currentSort = sortFilter.value;
+            filterAndSortProducts();
+        });
+    }
+    if (prevPageBtn) {
+        prevPageBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayProducts();
+                updatePagination();
+            }
+        });
+    }
+    if (nextPageBtn) {
+        nextPageBtn.addEventListener('click', () => {
+            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayProducts();
+                updatePagination();
+            }
+        });
+    }
+    if (categoryCards) {
+        categoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                currentCategory = card.dataset.category;
+                if (categoryFilter) categoryFilter.value = currentCategory;
+                filterAndSortProducts();
+            });
+        });
+    }
 
     // Filter and Sort Products
     function filterAndSortProducts() {
@@ -135,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Display Products
     function displayProducts() {
+        if (!productsContainer) return;
         const startIndex = (currentPage - 1) * productsPerPage;
         const endIndex = startIndex + productsPerPage;
         const currentProducts = filteredProducts.slice(startIndex, endIndex);
@@ -197,10 +237,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update Pagination
     function updatePagination() {
+        if (!totalPagesElem || !currentPageElem) return;
         const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
         totalPagesElem.textContent = totalPages || 1;
         currentPageElem.textContent = currentPage;
-        prevPageBtn.disabled = currentPage === 1;
-        nextPageBtn.disabled = currentPage === totalPages;
+        if (prevPageBtn) prevPageBtn.disabled = currentPage === 1;
+        if (nextPageBtn) nextPageBtn.disabled = currentPage === totalPages;
     }
 });
